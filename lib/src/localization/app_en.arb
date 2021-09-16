@@ -1,0 +1,6 @@
+{
+  "appTitle": "flu_fire_auth",
+  "@appTitle": {
+    "description": "The title of the application"
+  }
+}
