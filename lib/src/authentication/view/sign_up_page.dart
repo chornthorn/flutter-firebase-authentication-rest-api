@@ -10,7 +10,7 @@ class SignUpPage extends StatelessWidget {
   const SignUpPage({Key? key}) : super(key: key);
 
   static const String routeName = "/sign_up_page";
-
+  static Page page() => const MaterialPage<void>(child: SignUpPage());
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;

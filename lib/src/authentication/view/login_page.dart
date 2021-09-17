@@ -11,7 +11,7 @@ class LoginPage extends StatelessWidget {
   const LoginPage({Key? key}) : super(key: key);
 
   static const String routeName = "/login_page";
-
+  static Page page() => const MaterialPage<void>(child: LoginPage());
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;

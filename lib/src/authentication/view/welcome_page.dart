@@ -12,6 +12,8 @@ class WelcomePage extends StatelessWidget {
 
   static const String routeName = "/welcome_page";
 
+  static Page page() => const MaterialPage<void>(child: WelcomePage());
+
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
@@ -55,8 +57,7 @@ class WelcomePage extends StatelessWidget {
                 CustomButton(
                   text: 'Sign Up',
                   onPressed: () {
-                    Navigator.restorablePushNamed(
-                      context,
+                    Navigator.of(context).pushNamed(
                       SignUpPage.routeName,
                     );
                   },

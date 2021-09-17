@@ -11,7 +11,8 @@ class SampleItemListView extends StatelessWidget {
     this.items = const [SampleItem(1), SampleItem(2), SampleItem(3)],
   }) : super(key: key);
 
-  static const routeName = '/';
+  static const routeName = '/sample_view_list';
+  static Page page() => const MaterialPage<void>(child: SampleItemListView());
 
   final List<SampleItem> items;
 
