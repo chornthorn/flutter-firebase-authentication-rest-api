@@ -14,14 +14,24 @@ dependencies:
     sdk: flutter
   flutter_localizations:
     sdk: flutter
+  fluttericon: ^2.0.0
+  lottie: ^1.1.0
+  bloc: ^7.1.0
+  flutter_bloc: ^7.2.0
+  equatable: ^2.0.3
+  event_bus: ^2.0.0
+  get_it: ^7.2.0
+  http: ^0.13.3
+  shared_preferences: ^2.0.7
+  flutter_easyloading: ^3.0.3
+  url_launcher: ^6.0.10
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
-
+  flutter_native_splash: ^1.2.3
   flutter_lints: ^1.0.0
-  fluttericon: ^2.0.0
-  lottie: ^1.1.0
+
 
 flutter:
   uses-material-design: true
