@@ -4,6 +4,9 @@ import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flu_fire_auth/src/features/authentication/model/authentication_status_model.dart';
 import 'package:flu_fire_auth/src/features/authentication/service/authentication_service.dart';
+import 'package:flu_fire_auth/src/features/main_view.dart';
+import 'package:flu_fire_auth/src/features/splash/view/splash_view.dart';
+import 'package:flutter_modular/flutter_modular.dart';
 
 part 'authentication_state.dart';
 
@@ -23,7 +26,7 @@ class AuthenticationCubit extends Cubit<AuthenticationState> {
 
   void _statusChanged(final AuthenticationStatus status) async {
     if (status == AuthenticationStatus.authenticated) {
-      final accessToken = await _authenticationService.accessToken();
+      final accessToken = await _authenticationService.getAccessToken();
       if (accessToken != null && accessToken.isNotEmpty) {
         emit(AuthenticationState.authenticated(accessToken));
       } else {
@@ -36,10 +39,11 @@ class AuthenticationCubit extends Cubit<AuthenticationState> {
 
   void logoutRequested() async {
     _authenticationService.logOut();
+    Modular.to.navigate(SplashView.routeName);
   }
 
   Future<bool> isLogged() async {
-    final result =  await _authenticationService.accessToken();
+    final result =  await _authenticationService.getAccessToken();
     if(result != null) return true;
     return false;
   }

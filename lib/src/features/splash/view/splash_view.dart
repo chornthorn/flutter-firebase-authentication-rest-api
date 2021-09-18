@@ -3,7 +3,7 @@ import 'package:flu_fire_auth/src/features/authentication/controller/authenticat
 import 'package:flu_fire_auth/src/features/authentication/model/authentication_status_model.dart';
 import 'package:flu_fire_auth/src/features/authentication/view/component/bong_thorn_logo.dart';
 import 'package:flu_fire_auth/src/features/authentication/view/welcome_page.dart';
-import 'package:flu_fire_auth/src/features/sample_feature/sample_item_list_view.dart';
+import 'package:flu_fire_auth/src/features/main_view.dart';
 import 'package:flu_fire_auth/src/features/splash/controller/splash_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -46,7 +46,7 @@ class CheckAuthentication extends StatelessWidget {
           case AuthenticationStatus.unauthenticated:
             return [WelcomePage.page()];
           case AuthenticationStatus.authenticated:
-            return [SampleItemListView.page()];
+            return [MainView.page()];
           case AuthenticationStatus.loading:
           default:
             return [SplashScreen.page()];

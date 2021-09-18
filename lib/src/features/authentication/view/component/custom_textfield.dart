@@ -15,6 +15,7 @@ class CustomTextField extends StatelessWidget {
         color: Color(0xfff0f5fc),
       ),
       child: TextField(
+        controller: controller,
         decoration: InputDecoration(
           contentPadding:
           const EdgeInsets.symmetric(horizontal: 16, vertical: 6),

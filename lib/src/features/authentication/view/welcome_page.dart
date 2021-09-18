@@ -58,19 +58,14 @@ class WelcomePage extends StatelessWidget {
                 CustomButton(
                   text: 'Sign Up',
                   onPressed: () {
-                    Navigator.of(context).pushNamed(
-                      SignUpPage.routeName,
-                    );
+                    Modular.to.pushNamed(SignUpPage.routeName);
                   },
                 ),
                 const SizedBox(height: 16),
                 CustomOutlineButton(
                   label: "Login",
                   onPressed: () {
-                    Navigator.restorablePushNamed(
-                      context,
-                      LoginPage.routeName,
-                    );
+                    Modular.to.pushNamed(LoginPage.routeName);
                   },
                 ),
                 const SizedBox(height: 50),

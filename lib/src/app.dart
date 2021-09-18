@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 
 import 'features/authentication/controller/authentication/authentication_cubit.dart';
+import 'features/bottom_navigation/controller/bottom_navigation_cubit.dart';
 import 'features/splash/controller/splash_cubit.dart';
 import 'features/splash/view/splash_view.dart';
 
@@ -29,6 +31,9 @@ class _MyAppState extends State<MyApp> {
         BlocProvider(
           create: (context) => Modular.get<AuthenticationCubit>(),
         ),
+        BlocProvider(
+          create: (context) => Modular.get<BottomNavigationCubit>()..pageTapped(0,context),
+        ),
       ],
       child: MaterialApp(
         localizationsDelegates: const [
@@ -46,6 +51,7 @@ class _MyAppState extends State<MyApp> {
         // darkTheme: ThemeData.dark(),
         // themeMode: settingsController.themeMode,
         initialRoute: SplashView.routeName,
+        builder: EasyLoading.init(),
       ).modular(),
     );
   }

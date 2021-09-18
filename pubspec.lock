@@ -50,13 +50,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "2.1.0"
-  bottom_navy_bar:
-    dependency: "direct main"
-    description:
-      name: bottom_navy_bar
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "6.0.0"
   characters:
     dependency: transitive
     description:
@@ -336,6 +329,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.7.0"
+  modal_bottom_sheet:
+    dependency: "direct main"
+    description:
+      name: modal_bottom_sheet
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "2.0.0"
   modular_core:
     dependency: transitive
     description:
@@ -399,6 +399,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.11.1"
+  persistent_bottom_nav_bar:
+    dependency: "direct main"
+    description:
+      name: persistent_bottom_nav_bar
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "4.0.2"
   petitparser:
     dependency: transitive
     description:
@@ -530,6 +537,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "2.1.0"
+  tabler_icons:
+    dependency: "direct main"
+    description:
+      name: tabler_icons
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "0.0.3"
   term_glyph:
     dependency: transitive
     description:

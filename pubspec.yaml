@@ -30,8 +30,10 @@ dependencies:
   flutter_easyloading: ^3.0.3
   url_launcher: ^6.0.10
   connectivity_plus: ^1.1.0
-  bottom_navy_bar: ^6.0.0
   awesome_dialog: ^2.1.1
+  tabler_icons: ^0.0.3
+  persistent_bottom_nav_bar: ^4.0.2
+  modal_bottom_sheet: ^2.0.0
 
 dev_dependencies:
   flutter_test:
