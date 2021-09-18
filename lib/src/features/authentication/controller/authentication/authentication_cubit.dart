@@ -2,14 +2,14 @@ import 'dart:async';
 
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
-import 'package:flu_fire_auth/src/authentication/model/authentication_status_model.dart';
-import 'package:flu_fire_auth/src/authentication/service/authentication_service.dart';
+import 'package:flu_fire_auth/src/features/authentication/model/authentication_status_model.dart';
+import 'package:flu_fire_auth/src/features/authentication/service/authentication_service.dart';
 
 part 'authentication_state.dart';
 
 class AuthenticationCubit extends Cubit<AuthenticationState> {
   AuthenticationCubit(this._authenticationService)
-      : super(const AuthenticationState.unknown()) {
+      : super(const AuthenticationState.loading()) {
     _authenticationStatusSubscription =
         _authenticationService.status.listen(_onAuthenticationStatusChanged);
   }
@@ -19,9 +19,9 @@ class AuthenticationCubit extends Cubit<AuthenticationState> {
       _authenticationStatusSubscription;
 
   void _onAuthenticationStatusChanged(AuthenticationStatus status) =>
-      statusChanged(status);
+      _statusChanged(status);
 
-  void statusChanged(final AuthenticationStatus status) async {
+  void _statusChanged(final AuthenticationStatus status) async {
     if (status == AuthenticationStatus.authenticated) {
       final accessToken = await _authenticationService.accessToken();
       if (accessToken != null && accessToken.isNotEmpty) {
@@ -36,6 +36,12 @@ class AuthenticationCubit extends Cubit<AuthenticationState> {
 
   void logoutRequested() async {
     _authenticationService.logOut();
+  }
+
+  Future<bool> isLogged() async {
+    final result =  await _authenticationService.accessToken();
+    if(result != null) return true;
+    return false;
   }
 
   @override

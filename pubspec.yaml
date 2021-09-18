@@ -20,6 +20,8 @@ dependencies:
   bloc: ^7.1.0
   flutter_bloc: ^7.2.0
   equatable: ^2.0.3
+  # Route and Dependency management
+  flutter_modular: ^4.0.0+6
   event_bus: ^2.0.0
   get_it: ^7.2.0
   http: ^0.13.3

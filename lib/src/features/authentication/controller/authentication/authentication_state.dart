@@ -5,11 +5,11 @@ class AuthenticationState extends Equatable {
   final String? accessToken;
 
   const AuthenticationState._({
-    this.status = AuthenticationStatus.unknown,
-    this.accessToken = '',
+    this.status = AuthenticationStatus.loading,
+    this.accessToken,
   });
 
-  const AuthenticationState.unknown() : this._();
+  const AuthenticationState.loading() : this._();
 
   const AuthenticationState.authenticated(String accessToken)
       : this._(

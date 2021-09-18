@@ -1,5 +1,6 @@
-import 'package:flu_fire_auth/src/sample_feature/sample_item_list_view.dart';
+import 'package:flu_fire_auth/src/features/sample_feature/sample_item_list_view.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_modular/flutter_modular.dart';
 
 import 'component/bong_thorn_logo.dart';
 import 'component/custom_button.dart';
@@ -78,14 +79,10 @@ class WelcomePage extends StatelessWidget {
                   height: 50,
                   child: TextButton(
                     onPressed: () {
-                      Navigator.restorablePushNamedAndRemoveUntil(
-                        context,
-                        SampleItemListView.routeName,
-                        (route) => false,
-                      );
+                      Modular.to.pushNamed(SampleItemListView.routeName);
                     },
                     child: const Text(
-                      "Skip for now",
+                      "Go to my account",
                       style: TextStyle(
                         color: Colors.blue,
                         fontSize: 16,

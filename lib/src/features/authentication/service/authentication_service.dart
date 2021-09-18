@@ -1,6 +1,6 @@
 import 'dart:async';
 
-import 'package:flu_fire_auth/src/authentication/model/authentication_status_model.dart';
+import 'package:flu_fire_auth/src/features/authentication/model/authentication_status_model.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class AuthenticationService {

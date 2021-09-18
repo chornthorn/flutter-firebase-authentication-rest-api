@@ -1,12 +1,13 @@
 import 'package:flow_builder/flow_builder.dart';
-import 'package:flu_fire_auth/src/authentication/controller/authentication/authentication_cubit.dart';
-import 'package:flu_fire_auth/src/authentication/model/authentication_status_model.dart';
-import 'package:flu_fire_auth/src/authentication/view/component/bong_thorn_logo.dart';
-import 'package:flu_fire_auth/src/authentication/view/welcome_page.dart';
-import 'package:flu_fire_auth/src/sample_feature/sample_item_list_view.dart';
-import 'package:flu_fire_auth/src/splash/controller/splash_cubit.dart';
+import 'package:flu_fire_auth/src/features/authentication/controller/authentication/authentication_cubit.dart';
+import 'package:flu_fire_auth/src/features/authentication/model/authentication_status_model.dart';
+import 'package:flu_fire_auth/src/features/authentication/view/component/bong_thorn_logo.dart';
+import 'package:flu_fire_auth/src/features/authentication/view/welcome_page.dart';
+import 'package:flu_fire_auth/src/features/sample_feature/sample_item_list_view.dart';
+import 'package:flu_fire_auth/src/features/splash/controller/splash_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_modular/flutter_modular.dart';
 
 class SplashView extends StatelessWidget {
   const SplashView({Key? key}) : super(key: key);
@@ -16,6 +17,7 @@ class SplashView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<SplashCubit, SplashState>(
+      bloc: Modular.get<SplashCubit>(),
       builder: (context, state) {
         if (state is SplashLoaded) {
           return const CheckAuthentication();
@@ -45,7 +47,7 @@ class CheckAuthentication extends StatelessWidget {
             return [WelcomePage.page()];
           case AuthenticationStatus.authenticated:
             return [SampleItemListView.page()];
-          case AuthenticationStatus.unknown:
+          case AuthenticationStatus.loading:
           default:
             return [SplashScreen.page()];
         }
