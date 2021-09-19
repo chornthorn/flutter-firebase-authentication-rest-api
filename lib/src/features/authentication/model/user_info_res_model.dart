@@ -40,8 +40,8 @@ class UserModel {
 
   final String localId;
   final String email;
-  final String displayName;
-  final String photoUrl;
+  final String? displayName;
+  final String? photoUrl;
   final String passwordHash;
   final bool emailVerified;
   final int passwordUpdatedAt;

@@ -1,5 +1,10 @@
 import 'package:awesome_dialog/awesome_dialog.dart';
+import 'package:flu_fire_auth/src/features/authentication/controller/authentication/authentication_cubit.dart';
 import 'package:flu_fire_auth/src/features/authentication/controller/register/register_cubit.dart';
+import 'package:flu_fire_auth/src/features/authentication/controller/user_info/user_info_cubit.dart';
+import 'package:flu_fire_auth/src/features/authentication/model/authentication_status_model.dart';
+import 'package:flu_fire_auth/src/features/authentication/view/verify_account_view.dart';
+import 'package:flu_fire_auth/src/features/main_view.dart';
 import 'package:flu_fire_auth/src/features/sample_feature/sample_item_list_view.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -38,39 +43,16 @@ class _SignUpPageState extends State<SignUpPage> {
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
-    return BlocListener<RegisterCubit, RegisterState>(
+    return BlocListener<UserInfoCubit, UserInfoState>(
       listener: (context, state) {
-        if (state is RegisterLoading) {
-          EasyLoading.show();
-        }
-        if (state is RegisterFailure) {
-          EasyLoading.dismiss();
-          AwesomeDialog(
-            context: context,
-            dialogType: DialogType.ERROR,
-            animType: AnimType.SCALE,
-            title: 'Error',
-            desc: state.message,
-            btnCancelOnPress: () {},
-            btnOkOnPress: () {},
-            dismissOnTouchOutside: false,
-            dismissOnBackKeyPress: false,
-          ).show();
-        }
-        if (state is RegisterSuccess) {
-          EasyLoading.dismiss();
-          AwesomeDialog(
-            context: context,
-            dialogType: DialogType.SUCCES,
-            animType: AnimType.SCALE,
-            title: 'Success',
-            desc: 'Register completed',
-            btnOkOnPress: () {
-              Modular.to.navigate(SampleItemListView.routeName);
-            },
-            dismissOnTouchOutside: false,
-            dismissOnBackKeyPress: false,
-          ).show();
+        if (state is UserInfoLoaded) {
+          if (state.data[0].emailVerified) {
+            Modular.to.navigate(MainView.routeName);
+          } else {
+            Modular.to.navigate(
+              VerifyAccountView.routeName + "/" + state.data[0].email,
+            );
+          }
         }
       },
       child: Scaffold(
@@ -97,7 +79,7 @@ class _SignUpPageState extends State<SignUpPage> {
                     text: 'Sign Up',
                     onPressed: () {
                       Modular.get<RegisterCubit>()
-                          .onSubmitRegister(context,email.text, password.text);
+                          .onSubmitRegister(context, email.text, password.text);
                     },
                   ),
                   SizedBox(height: size.height * 0.02),

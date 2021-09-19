@@ -2,11 +2,10 @@ import 'dart:async';
 
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
+import 'package:flu_fire_auth/main.dart';
+import 'package:flu_fire_auth/src/core/app_event/authentication_event.dart';
 import 'package:flu_fire_auth/src/features/authentication/model/authentication_status_model.dart';
 import 'package:flu_fire_auth/src/features/authentication/service/authentication_service.dart';
-import 'package:flu_fire_auth/src/features/main_view.dart';
-import 'package:flu_fire_auth/src/features/splash/view/splash_view.dart';
-import 'package:flutter_modular/flutter_modular.dart';
 
 part 'authentication_state.dart';
 
@@ -37,14 +36,18 @@ class AuthenticationCubit extends Cubit<AuthenticationState> {
     }
   }
 
+  void onLogged() {
+    _authenticationService.logged();
+  }
+
   void logoutRequested() async {
     _authenticationService.logOut();
-    Modular.to.navigate(SplashView.routeName);
+    eventBus.fire(AuthenticationEvent(AuthenticationStatus.unauthenticated));
   }
 
   Future<bool> isLogged() async {
-    final result =  await _authenticationService.getAccessToken();
-    if(result != null) return true;
+    final result = await _authenticationService.getAccessToken();
+    if (result != null) return true;
     return false;
   }
 

@@ -22,14 +22,7 @@ class BottomNavigationCubit extends Cubit<BottomNavigationState> {
     } else if (index == 2) {
       emit(PageThreeLoaded());
     } else {
-      // Navigator.of(context).push(MaterialWithModalsPageRoute(
-      //     builder: (BuildContext context) => Container()));
-      showCupertinoModalBottomSheet(
-        expand: true,
-        context: context,
-        backgroundColor: Colors.transparent,
-        builder: (context) => const ModalWithNavigator(),
-      );
+      emit(PageFourLoaded());
     }
   }
 }

@@ -1,3 +1,4 @@
+import 'package:flu_fire_auth/src/features/main_view.dart';
 import 'package:flu_fire_auth/src/features/sample_feature/sample_item_list_view.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
@@ -74,10 +75,10 @@ class WelcomePage extends StatelessWidget {
                   height: 50,
                   child: TextButton(
                     onPressed: () {
-                      Modular.to.pushNamed(SampleItemListView.routeName);
+                      Modular.to.pushNamed(MainView.routeName);
                     },
                     child: const Text(
-                      "Go to my account",
+                      "Go to dashboard",
                       style: TextStyle(
                         color: Colors.blue,
                         fontSize: 16,

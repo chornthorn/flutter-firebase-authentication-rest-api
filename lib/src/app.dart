@@ -1,3 +1,4 @@
+import 'package:flu_fire_auth/src/features/authentication/controller/user_info/user_info_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
@@ -26,13 +27,14 @@ class _MyAppState extends State<MyApp> {
     return MultiBlocProvider(
       providers: [
         BlocProvider(
-          create: (context) => Modular.get<SplashCubit>(),
-        ),
-        BlocProvider(
           create: (context) => Modular.get<AuthenticationCubit>(),
         ),
         BlocProvider(
-          create: (context) => Modular.get<BottomNavigationCubit>()..pageTapped(0,context),
+          create: (context) => Modular.get<UserInfoCubit>()..getUserInfoOpenApp(),
+        ),
+        BlocProvider(
+          create: (context) =>
+              Modular.get<BottomNavigationCubit>()..pageTapped(0, context),
         ),
       ],
       child: MaterialApp(
@@ -50,7 +52,7 @@ class _MyAppState extends State<MyApp> {
         // theme: ThemeData(),
         // darkTheme: ThemeData.dark(),
         // themeMode: settingsController.themeMode,
-        initialRoute: SplashView.routeName,
+        initialRoute: Modular.initialRoute,
         builder: EasyLoading.init(),
       ).modular(),
     );

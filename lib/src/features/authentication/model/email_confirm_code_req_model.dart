@@ -1,10 +1,10 @@
 class EmailConfirmCodeReqModel {
   EmailConfirmCodeReqModel({
-    required this.requestType,
+      this.requestType,
     required this.idToken,
   });
 
-  final String requestType;
+  final String? requestType;
   final String idToken;
 
   factory EmailConfirmCodeReqModel.fromJson(Map<String, dynamic> json) =>

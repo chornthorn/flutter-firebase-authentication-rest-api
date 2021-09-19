@@ -9,8 +9,8 @@ class ProviderUserInfo {
   });
 
   final String providerId;
-  final String displayName;
-  final String photoUrl;
+  final String? displayName;
+  final String? photoUrl;
   final String federatedId;
   final String email;
   final String rawId;

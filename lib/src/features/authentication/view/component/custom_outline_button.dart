@@ -5,10 +5,14 @@ class CustomOutlineButton extends StatelessWidget {
     Key? key,
     required this.label,
     required this.onPressed,
+    this.borderColor,
+    this.textColor,
   }) : super(key: key);
 
   final String label;
   final VoidCallback onPressed;
+  final Color? borderColor;
+  final Color? textColor;
 
   @override
   Widget build(BuildContext context) {
@@ -20,12 +24,12 @@ class CustomOutlineButton extends StatelessWidget {
         width: double.infinity,
         alignment: Alignment.center,
         decoration: BoxDecoration(
-            border: Border.all(color: Colors.blue, width: 1.2),
+            border: Border.all(color: borderColor ?? Colors.blue, width: 1.2),
             borderRadius: BorderRadius.circular(4)),
         child: Text(
           label,
-          style: const TextStyle(
-            color: Colors.blue,
+          style: TextStyle(
+            color: textColor ?? Colors.blue,
             fontSize: 16,
             fontWeight: FontWeight.w500,
           ),

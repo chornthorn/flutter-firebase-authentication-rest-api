@@ -1,7 +1,8 @@
-import 'package:flow_builder/flow_builder.dart';
 import 'package:flu_fire_auth/src/features/authentication/controller/authentication/authentication_cubit.dart';
+import 'package:flu_fire_auth/src/features/authentication/controller/user_info/user_info_cubit.dart';
 import 'package:flu_fire_auth/src/features/authentication/model/authentication_status_model.dart';
 import 'package:flu_fire_auth/src/features/authentication/view/component/bong_thorn_logo.dart';
+import 'package:flu_fire_auth/src/features/authentication/view/verify_account_view.dart';
 import 'package:flu_fire_auth/src/features/authentication/view/welcome_page.dart';
 import 'package:flu_fire_auth/src/features/main_view.dart';
 import 'package:flu_fire_auth/src/features/splash/controller/splash_cubit.dart';
@@ -9,15 +10,25 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 
-class SplashView extends StatelessWidget {
+class SplashView extends StatefulWidget {
   const SplashView({Key? key}) : super(key: key);
 
   static const String routeName = "/";
 
   @override
+  State<SplashView> createState() => _SplashViewState();
+}
+
+class _SplashViewState extends State<SplashView> {
+  @override
+  void initState() {
+    context.read<SplashCubit>().registerService();
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return BlocBuilder<SplashCubit, SplashState>(
-      bloc: Modular.get<SplashCubit>(),
       builder: (context, state) {
         if (state is SplashLoaded) {
           return const CheckAuthentication();
@@ -39,19 +50,31 @@ class CheckAuthentication extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return FlowBuilder<AuthenticationState>(
-      state: context.select((AuthenticationCubit bloc) => bloc.state),
-      onGeneratePages: (AuthenticationState state, List<Page> pages) {
-        switch (state.status) {
-          case AuthenticationStatus.unauthenticated:
-            return [WelcomePage.page()];
-          case AuthenticationStatus.authenticated:
-            return [MainView.page()];
-          case AuthenticationStatus.loading:
-          default:
-            return [SplashScreen.page()];
-        }
-      },
+    return MultiBlocListener(
+      listeners: [
+        BlocListener<AuthenticationCubit, AuthenticationState>(
+          listener: (context, state) {
+            if (state.status == AuthenticationStatus.authenticated) {
+            } else if (state.status == AuthenticationStatus.unauthenticated) {
+              Modular.to.navigate(WelcomePage.routeName);
+            }
+          },
+        ),
+        BlocListener<UserInfoCubit, UserInfoState>(
+          listener: (context, state) {
+            if (state is UserInfoLoaded) {
+              if (state.data[0].emailVerified) {
+                Modular.to.navigate(MainView.routeName);
+              } else {
+                Modular.to.navigate(
+                  VerifyAccountView.routeName + "/" + state.data[0].email,
+                );
+              }
+            }
+          },
+        ),
+      ],
+      child: const SplashScreen(),
     );
   }
 }
